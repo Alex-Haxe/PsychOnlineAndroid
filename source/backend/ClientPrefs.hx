@@ -14,6 +14,15 @@ import states.TitleState;
 
 // Add a variable here and it will get automatically saved
 class SaveVariables {
+	#if mobile
+	public var pauseButton:Bool = true;
+	public var fullHint:Bool = false;
+	public var hitboxStyle:String = 'Gradient';
+	public var hintStyle:String = 'Simple';
+	public var hitboxOpacity:Float = 0.55;
+	public var hintOpacity:Float = 0.25;
+	public var virtualPadOpacity:Float = 0.7;
+	#end
 	public var downScroll:Bool = false;
 	public var middleScroll:Bool = false;
 	public var opponentStrums:Bool = true;
