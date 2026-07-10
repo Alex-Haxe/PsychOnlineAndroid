@@ -34,8 +34,8 @@ class FunkinHitbox extends FlxSpriteGroup {
         var w:Int = Std.int(FlxG.width / 4);
         var h:Int = Std.int(FlxG.height);
         
-        var hintH:Int = ClientPrefs.fullHint ? Std.int(FlxG.height) : Std.int(FlxG.height / 28);
-        var hintY:Int = hintStyle == "Gradient" ? 0 : (ClientPrefs.downscroll ? FlxG.height - hintH : 0);
+        var hintH:Int = ClientPrefs.data.fullHint ? Std.int(FlxG.height) : Std.int(FlxG.height / 28);
+        var hintY:Int = hintStyle == "Gradient" ? 0 : (ClientPrefs.data.downscroll ? FlxG.height - hintH : 0);
 
         hitboxCamera = new FlxCamera(0, 0, FlxG.width, FlxG.height);
         hitboxCamera.bgColor = 0x00000000;
@@ -156,13 +156,13 @@ class HitboxButton extends FlxSprite {
         var effectivePressed:Bool = pressed || (parentButton != null && parentButton.pressed);
 
         if (effectivePressed) {
-            alpha = isHint ? 0.00001 : ClientPrefs.hitboxOpacity;
+            alpha = isHint ? 0.00001 : ClientPrefs.data.hitboxOpacity;
         } else {
             if (isHint) {
-                alpha = ClientPrefs.hintOpacity;
+                alpha = ClientPrefs.data.hintOpacity;
             } else {
                 if (alpha > 0.00001) {
-                    alpha -= (ClientPrefs.hitboxOpacity / 0.10) * elapsed;
+                    alpha -= (ClientPrefs.data.hitboxOpacity / 0.10) * elapsed;
                     if (alpha < 0.00001) {
                         alpha = 0.00001;
                     }
