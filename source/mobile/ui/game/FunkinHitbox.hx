@@ -34,7 +34,7 @@ class FunkinHitbox extends FlxSpriteGroup {
         var h:Int = Std.int(FlxG.height);
         
         var hintH:Int = ClientPrefs.data.fullHint ? Std.int(FlxG.height) : Std.int(FlxG.height / 28);
-        var hintY:Int = hintStyle == "Gradient" ? 0 : (ClientPrefs.data.downscroll ? FlxG.height - hintH : 0);
+        var hintY:Int = hintStyle == "Gradient" ? 0 : (ClientPrefs.data.downScroll ? FlxG.height - hintH : 0);
 
         hitboxCamera = new FlxCamera(0, 0, FlxG.width, FlxG.height);
         hitboxCamera.bgColor = 0x00000000;
