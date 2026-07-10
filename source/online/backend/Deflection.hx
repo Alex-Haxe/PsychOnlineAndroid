@@ -1,6 +1,9 @@
 package online.backend;
 
 import CompileTime;
+#if android
+import extension.androidtools.jni.JNICache;
+#end
 
 class Deflection {
 	//@:unreflective public static final luaClassBlacklist:Array<String> = ['cpp', 'lib', 'reflect', 'cffi', 'process', 'lua', 'http'];
@@ -193,7 +196,7 @@ class Deflection {
 		#if (extension_androidtools)
 		// `android.jni.JNICache`
 		// Same as `lime.system.JNI`
-		blacklist.push(android.jni.JNICache);
+		blacklist.push(JNICache);
 		#end
 
 		classBlacklist = blacklist;
