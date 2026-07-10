@@ -18,7 +18,7 @@ import openfl.text.TextFormat;
 import openfl.utils.QName;
 
 using StringTools;
-
+ 
 /**
  * An `FlxText` object that can be selected and edited by the user.
  */
