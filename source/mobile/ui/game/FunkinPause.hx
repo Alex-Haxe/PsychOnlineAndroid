@@ -35,7 +35,7 @@ class FunkinPause extends FlxGroup
         pauseButton.animation.play('idle');
         pauseButton.setPosition((FlxG.width - pauseButton.width) - 35, 35);
         
-        pauseButton.antialiasing = Options.antialiasing; 
+        //pauseButton.antialiasing = Options.antialiasing; 
         
         pauseButton.scrollFactor.set();
         pauseButton.cameras = [PauseCam];
@@ -63,7 +63,7 @@ class FunkinPause extends FlxGroup
         pauseButton.visible = isButtonActive;
         pauseCircle.visible = isButtonActive;
 
-        if (ClientPrefs.pauseButton == false) {
+        if (ClientPrefs.data.pauseButton == false) {
             pauseButton.alpha = 0;
             pauseCircle.alpha = 0;
         } else {
