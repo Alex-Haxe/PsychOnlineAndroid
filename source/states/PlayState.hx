@@ -3140,6 +3140,7 @@ class PlayState extends MusicBeatState
 	}
 
 	// Updating Discord Rich Presence.
+	#if desktop
 	function resetRPC(?cond:Bool = false, ?paused:Null<Bool>) {
 		paused ??= this.paused;
 
@@ -3157,6 +3158,7 @@ class PlayState extends MusicBeatState
 			DiscordClient.changePresence(upperText, downText, iconP2.getCharacter());
 		#end
 	}
+	#end
 
 	public function resyncVocals():Void
 	{
