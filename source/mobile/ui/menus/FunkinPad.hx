@@ -271,7 +271,7 @@ class FunkinPad extends FlxSpriteGroup
 
 		var padButtons = [buttonY, buttonX, buttonC, buttonB, buttonA, buttonDown2, buttonRight2, buttonUp2, buttonLeft2, buttonDown, buttonRight, buttonUp, buttonLeft, buttonE, buttonM, buttonBack];
 		
-		var currentOpacity = ClientPrefs.virtualPadOpacity;
+		var currentOpacity = ClientPrefs.data.virtualPadOpacity;
 		for (btn in padButtons) {
 			if (btn != null) {
 				if (btn == buttonE || btn == buttonM || btn == buttonBack) {
