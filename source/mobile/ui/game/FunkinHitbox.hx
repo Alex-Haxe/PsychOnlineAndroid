@@ -1,7 +1,6 @@
 package mobile.ui.game;
 
-import funkin.game.PlayState;
-import funkin.game.StrumLine;
+import states.PlayState;
 
 typedef HitboxCallback = {
     var callback:Void->Void;
