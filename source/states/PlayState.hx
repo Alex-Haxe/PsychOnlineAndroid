@@ -106,6 +106,12 @@ import tea.SScript;
 
 import online.backend.schema.Player;
 
+#if mobile
+import mobile.ui.game.FunkinPause;
+import mobile.ui.game.FunkinHitbox;
+import backend.ClientPrefs;
+#end
+
 @:build(online.backend.Macros.getSetForwarder())
 class PlayState extends MusicBeatState
 {
@@ -125,6 +131,11 @@ class PlayState extends MusicBeatState
 		['Sick!', 1], //From 90% to 99%
 		['Perfect!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
 	];
+
+	#if mobile
+	public var hitbox:FunkinHitbox;
+	public var pauseButton:FunkinPause;
+	#end
 
 	//event variables
 	private var isCameraOnForcedPos:Bool = false;
@@ -967,6 +978,16 @@ class PlayState extends MusicBeatState
 
 			Mods.currentModDirectory = oldModDir;
 		});
+		#end
+
+		#if mobile
+		hitbox = new FunkinHitbox(Options.hitboxStyle, Options.hintStyle);
+        add(hitbox);
+        hitbox.setupCamera();
+
+		pauseButton = new mobile.ui.game.FunkinPause();
+        add(pauseButton);
+        pauseButton.setFunkinPause('true');
 		#end
 
 		function initPlayCharacter(isRight:Bool, ?player:Player, ?sid:String) {
