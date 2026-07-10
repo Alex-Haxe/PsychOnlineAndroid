@@ -981,7 +981,7 @@ class PlayState extends MusicBeatState
 		#end
 
 		#if mobile
-		hitbox = new FunkinHitbox(Options.hitboxStyle, Options.hintStyle);
+		hitbox = new FunkinHitbox(ClientPrefs.data..hitboxStyle, ClientPrefs.data.hintStyle);
         add(hitbox);
         hitbox.setupCamera();
 
@@ -3801,7 +3801,7 @@ class PlayState extends MusicBeatState
 		AL.sourcei(handle, AL.DIRECT_FILTER, filter);
 	}
 
-	function openPauseMenu()
+	public function openPauseMenu()
 	{
 		if (!canPause || subState is PauseSubState /*|| GameClient.isConnected()*/)
 			return;
