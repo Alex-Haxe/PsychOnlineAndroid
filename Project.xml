@@ -234,4 +234,18 @@
 	<icon path="art/iconOG.png" />
 
 	<assets path='art/README_LINUX.txt' rename='README_PLEASE.txt' if="linux" />
+
+	<!-- Android Section -->
+	<section if="android">	
+		<haxelib name="extension-androidtools" />
+		
+	    <config:android minimum-sdk-version="21" />
+        <config:android target-sdk-version="34" />
+		
+	    <android permission="android.permission.MANAGE_EXTERNAL_STORAGE" />
+		<android permission="android.permission.READ_EXTERNAL_STORAGE" />
+        <android permission="android.permission.WRITE_EXTERNAL_STORAGE" />
+		<android permission="android.permission.VIBRATE" />
+		<android permission="android.permission.INTERNET" />
+	</section>
 </project>
