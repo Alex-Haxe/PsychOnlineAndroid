@@ -79,7 +79,7 @@ class FunkinJoystick extends FlxSpriteGroup
 			return;
 		}
 
-		var currentOpacity = ClientPrefs.virtualPadOpacity;
+		var currentOpacity = ClientPrefs.data.virtualPadOpacity;
 		base.alpha = currentOpacity;
 		thumb.alpha = currentOpacity;
 
