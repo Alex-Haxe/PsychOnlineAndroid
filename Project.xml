@@ -74,6 +74,8 @@
 
 	<define name="CHECK_FOR_UPDATES" unless="LOCAL" />
 
+	<define name="PSYCH" />
+
 	<!-- Week Assets -->
 	<library name="videos" preload="true" />
 	<section if="PRELOAD_ALL">
