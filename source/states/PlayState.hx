@@ -981,7 +981,7 @@ class PlayState extends MusicBeatState
 		#end
 
 		#if mobile
-		hitbox = new FunkinHitbox(ClientPrefs.data..hitboxStyle, ClientPrefs.data.hintStyle);
+		hitbox = new FunkinHitbox(ClientPrefs.data.hitboxStyle, ClientPrefs.data.hintStyle);
         add(hitbox);
         hitbox.setupCamera();
 
