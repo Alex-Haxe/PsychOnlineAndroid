@@ -1,6 +1,12 @@
 {
   "dependencies": [
     {
+      "name": "extension-androidtools",
+      "type": "git",
+      "ref": "main",
+      "url": "https://github.com/Alex-Haxe/extension-androidtools"
+    },
+    {
       "name": "hscript",
       "type": "haxelib",
       "version": "2.6.0"
