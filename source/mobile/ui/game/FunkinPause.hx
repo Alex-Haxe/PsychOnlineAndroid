@@ -94,11 +94,11 @@ class FunkinPause extends FlxGroup
 
         var game = PlayState.instance;
 
-        if (touchedPause && !game.paused && game.health > 0)
+        if (touchedPause && !game.paused && game.canPause && !game.endingSong)
         {
             pauseButton.animation.play('confirm');
             
-            game.pauseGame();
+            game.openPauseMenu();
         }
     }
 }
