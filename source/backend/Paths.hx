@@ -1,6 +1,5 @@
 package backend;
 
-
 import openfl.utils.Future;
 import flixel.system.FlxAssets.FlxGraphicAsset;
 import flxanimate.data.SpriteMapData.FlxSpriteMap;
@@ -41,7 +40,7 @@ class Paths
 	inline public static var VIDEO_EXT = "mp4";
 	inline public static var PATH_SLASH = #if windows '\\' #else '/' #end;
 
-	inline static public function sysPath(file:String):String {
+	static public function sysPath(file:String):String {
 		#if android
 		var appDir:String = lime.system.System.applicationStorageDirectory;
 		if (appDir != null) {
