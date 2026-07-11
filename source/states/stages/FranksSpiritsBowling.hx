@@ -9,7 +9,7 @@ import objects.Character;
 import openfl.media.Sound;
 #if VIDEOS_ALLOWED
 import hxvlc.flixel.FlxVideoSprite;
-#endif
+#end
 
 class FranksSpiritsBowling extends BaseStage {
     var dancers:Array<BGSprite> = [];
@@ -86,7 +86,7 @@ class FranksSpiritsBowling extends BaseStage {
 				setStartCallback(() -> {
 					#if VIDEOS_ALLOWED
 					game.startVideo('stressPicoCutscene');
-					#endif
+					#end
 					inCutscene = true;
 					canPause = true;
 				});
