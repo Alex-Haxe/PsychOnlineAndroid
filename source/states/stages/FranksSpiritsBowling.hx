@@ -7,7 +7,9 @@ import states.stages.objects.TankmenBG;
 import flixel.math.FlxPoint;
 import objects.Character;
 import openfl.media.Sound;
+#if VIDEOS_ALLOWED
 import hxvlc.flixel.FlxVideoSprite;
+#endif
 
 class FranksSpiritsBowling extends BaseStage {
     var dancers:Array<BGSprite> = [];
@@ -82,7 +84,9 @@ class FranksSpiritsBowling extends BaseStage {
 
 			if (!seenCutscene) {
 				setStartCallback(() -> {
+					#if VIDEOS_ALLOWED
 					game.startVideo('stressPicoCutscene');
+					#endif
 					inCutscene = true;
 					canPause = true;
 				});
