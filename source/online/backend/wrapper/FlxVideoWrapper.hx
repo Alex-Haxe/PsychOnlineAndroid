@@ -1,5 +1,5 @@
 package online.backend.wrapper;
-
+#if VIDEOS_ALLOWED
 import openfl.display.DisplayObject;
 import flixel.util.FlxAxes;
 import openfl.display.BitmapData;
@@ -145,3 +145,4 @@ class FlxVideoWrapper extends DisplayObject { // as DisplayObject so scripts thi
 		// _video.stop();
 	}
 }
+#end
