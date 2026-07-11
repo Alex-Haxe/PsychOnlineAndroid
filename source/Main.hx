@@ -120,11 +120,13 @@ class Main extends Sprite
 		setupGame();
 	}
 
-	private function setupGame():Void
+    private function setupGame():Void
 	{
+		trace("1");
 		var stageWidth:Int = Lib.current.stage.stageWidth;
 		var stageHeight:Int = Lib.current.stage.stageHeight;
 
+		trace("2");
 		if (game.zoom == -1.0)
 		{
 			var ratioX:Float = stageWidth / game.width;
@@ -134,8 +136,10 @@ class Main extends Sprite
 			game.height = Math.ceil(stageHeight / game.zoom);
 		}
 
+		trace("3");
 		CoolUtil.setDarkMode(true);
 
+		trace("4");
 		#if lumod
 		Lumod.addons.push(online.backend.LuaModuleSwap.LumodModuleAddon);
 		Lumod.scriptPathHandler = scriptPath -> {
@@ -152,15 +156,20 @@ class Main extends Sprite
 		Lumod.initializeLuaCallbacks = false;
 		#end
 
+		trace("5");
 		#if hl
 		sys.ssl.Socket.DEFAULT_VERIFY_CERT = false;
 		#end
 	
+		trace("6");
 		#if LUA_ALLOWED Lua.set_callbacks_function(cpp.Callable.fromStaticFunction(psychlua.CallbackHandler.call)); #end
 		Controls.instance = new Controls();
 		ClientPrefs.loadDefaultKeys();
+
+		trace("7");
 		addChild(new FlxGame(game.width, game.height, game.initialState, #if (flixel < "5.0.0") game.zoom, #end game.framerate, game.framerate, game.skipSplash, game.startFullscreen));
 
+		trace("8");
 		#if !ios
 		fpsVar = new FPS(10, 3, 0xFFFFFF);
 		addChild(fpsVar);
@@ -171,15 +180,18 @@ class Main extends Sprite
 		}
 		#end
 
+		trace("9");
 		#if linux
 		Lib.current.stage.window.setIcon(Image.fromFile("icon.png"));
 		#end
 
+		trace("10");
 		#if html5
 		FlxG.autoPause = false;
 		FlxG.mouse.visible = false;
 		#end
 		
+		trace("11");
 		//haxe errors caught by openfl
 		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, (e) -> {
 			onCrash(e.error);
@@ -187,10 +199,12 @@ class Main extends Sprite
 		//internal c++ exceptions
 		untyped __global__.__hxcpp_set_critical_error_handler(onCrash);
 
+		trace("12");
 		#if DISCORD_ALLOWED
 		DiscordClient.initialize();
 		#end
 
+		trace("13");
 		// shader coords fix
 		FlxG.signals.gameResized.add(function (w, h) {
 		     if (FlxG.cameras != null) {
@@ -205,22 +219,27 @@ class Main extends Sprite
 			 resetSpriteCache(FlxG.game);
 		});
 
+		trace("14");
 		//ONLINE STUFF, BELOW CODE USE FOR BACKPORTING
 
 		PSYCH_ONLINE_VERSION = FlxG.stage.application.meta.get('version');
 
+		trace("15");
 		#if CHECK_FOR_UPDATES
 		if (ClientPrefs.data.checkForUpdates) {
+			trace("16");
 			trace('checking for update');
 			// should've done that earlier
 			var response = new online.http.HTTPClient("https://api.github.com/repos/Snirozu/Funkin-Psych-Online/releases/latest").request();
 			Main.repoHost = 'github';
 
+			trace("17");
 			if (response.isFailed()) {
 				response = new online.http.HTTPClient("https://codeberg.org/api/v1/repos/Snirozu/Funkin-Psych-Online/releases/latest").request();
 				Main.repoHost = 'codeberg';
 			}
 
+			trace("18");
 			if (!response.isFailed()) {
 				var latestRelease = haxe.Json.parse(response.getString());
 				Main.updateVersion = latestRelease.tag_name;
@@ -235,6 +254,7 @@ class Main extends Sprite
 					return Std.parseInt(s);
 				});
 
+				trace("19");
 				if (curVersion.contains('-rc.')) {
 					var candiVer = curVersion.split('-rc.');
 					Main.wankyUpdate = 'Runnning on a\nRelease Candidate No. ' + candiVer[1] + '\nto version: ' + candiVer[0];
@@ -242,6 +262,7 @@ class Main extends Sprite
 					states.TitleState.inDev = true;
 				}
 				else {
+					trace("20");
 					trace('comparing ' + updatVer + ' > ' + curVer);
 					for (i => num in updatVer) {
 						if (num < curVer[i] ?? 0) {
@@ -282,14 +303,19 @@ class Main extends Sprite
 		trace(Main.repoHost);
 		#end
 
+		trace("21");
 		GameClient.updateAddresses();
 
+		trace("22");
 		online.mods.ModDownloader.checkDeleteDlDir();
 
+		trace("23");
 		addChild(new online.gui.DownloadAlert.DownloadAlerts());
 
+		trace("24");
 		FlxG.plugins.add(new online.backend.Waiter());
 
+		trace("25");
 		online.backend.Thread.repeat(() -> {
 			try {
 				online.network.FunkinNetwork.ping();
@@ -299,6 +325,7 @@ class Main extends Sprite
 			}
 		}, 60, _ -> {}); // ping the server every minute
 		
+		trace("26");
 		//for some reason only cancels 2 downloads
 		Lib.application.window.onClose.add(() -> {
 			#if DISCORD_ALLOWED
@@ -312,6 +339,7 @@ class Main extends Sprite
 			online.network.Auth.saveClose();
 		});
 
+		trace("27");
 		Lib.application.window.onDropFile.add(path -> {
 			if (FileSystem.isDirectory(path))
 				return;
@@ -328,6 +356,7 @@ class Main extends Sprite
 			}
 		});
 
+		trace("28");
 		// clear messages before the current state gets destroyed and replaced with another
 		FlxG.signals.preStateSwitch.add(() -> {
 			GameClient.clearOnMessage();
@@ -335,10 +364,12 @@ class Main extends Sprite
 			Paths.clearUnusedMemory();
 		});
 
+		trace("29");
 		FlxG.signals.postGameReset.add(() -> {
 			online.gui.Alert.alert('Warning!', 'The game has been resetted, and there may occur visual bugs with the sidebar!\n\nIt\'s recommended to restart the game instead.');
 		});
 		
+		trace("30");
 		#if HSCRIPT_ALLOWED
 		FlxG.signals.postStateSwitch.add(() -> {
 			online.backend.SyncScript.dispatch("switchState", [FlxG.state]);
@@ -348,13 +379,16 @@ class Main extends Sprite
 			});
 		});
 
+		trace("31");
 		FlxG.signals.postUpdate.add(() -> {
 			if (online.backend.SyncScript.activeUpdate)
 				online.backend.SyncScript.dispatch("update", [FlxG.elapsed]);
 		});
 
+		trace("32");
 		online.backend.SyncScript.initScript();
 
+		trace("33");
 		#if interpret
 		online.backend.InterpretLiveReload.init();
 		#end
