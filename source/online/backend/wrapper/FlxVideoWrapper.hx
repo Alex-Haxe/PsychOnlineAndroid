@@ -1,17 +1,20 @@
 package online.backend.wrapper;
-#if VIDEOS_ALLOWED
 import openfl.display.DisplayObject;
 import flixel.util.FlxAxes;
 import openfl.display.BitmapData;
 import cpp.UInt32;
 import haxe.Int64;
+#if VIDEOS_ALLOWED
 import hxvlc.flixel.FlxVideo;
+#end
 import lime.app.Event;
 
 @:publicFields
 @:access(hxvlc.flixel.FlxVideo)
 @:build(online.backend.Macros.getSetForwarder())
-class FlxVideoWrapper extends DisplayObject { // as DisplayObject so scripts think it's actual FlxVideo
+class FlxVideoWrapper extends DisplayObject { 
+    #if VIDEOS_ALLOWED
+	// as DisplayObject so scripts think it's actual FlxVideo
 	var _video:FlxVideo;
 
 	override function get_visible() return _video.visible;
@@ -144,5 +147,34 @@ class FlxVideoWrapper extends DisplayObject { // as DisplayObject so scripts thi
 		_video.time = _video.length;
 		// _video.stop();
 	}
+    #else
+
+	public function new()
+	{
+		super();
+	}
+
+	public function play(location:String, ?shouldLoop:Bool = false):Bool
+	{
+		return false;
+	}
+
+	public function playVideo(location:String):Bool
+	{
+		return false;
+	}
+
+	public function stop():Void {}
+
+	public function pause():Void {}
+
+	public function resume():Void {}
+
+	public function togglePaused():Void {}
+
+	public function dispose():Void {}
+
+	public function finishVideo():Void {}
+
+	#end
 }
-#end
